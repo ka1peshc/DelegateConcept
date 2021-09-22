@@ -2,20 +2,35 @@
 
 namespace DelegatePractice
 {
-    public delegate int operation(int x, int y);
+    public delegate void DelegateEventHandler();
     class Program
     {
-        static int Addition(int num1, int num2)
+        //creating event method with datatype as DelegateEventHandler
+        public static event DelegateEventHandler add;
+
+        public static void India()
         {
-            return num1 + num2;
+            Console.WriteLine("India");
+        }
+        public static void Russia()
+        {
+            Console.WriteLine("Russia");
+        }
+        public static void Canada()
+        {
+            Console.WriteLine("Canada");
         }
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello World!");
-            operation op = new operation(Addition);
-            Console.WriteLine("addition is {0}", op(50,19));
-            Console.WriteLine("***************");
-            MulticastDelegate.ArrayOfDelegates.ImplementDelegate();
+            add += new DelegateEventHandler(India);
+            add += new DelegateEventHandler(Canada);
+            add += new DelegateEventHandler(Russia);
+
+            add.Invoke();
+
+            Console.WriteLine("*********Event Handling***********");
+            EventHandling.ImplementEvent();
+            //MulticastDelegate.ArrayOfDelegates.ImplementDelegate();
         }
     }
 }
